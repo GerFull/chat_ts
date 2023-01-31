@@ -1,0 +1,96 @@
+.chat{
+   background-color: #3e3e3f;
+   width: 100%;
+   height: 100vh;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   position: relative;
+   &__logo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 1;
+   }
+
+   &__back{
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 120px;
+      z-index: 1;
+   }
+
+   &__container{
+      display: flex;
+      gap: 50px;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+   }
+
+   &__usersContainer{
+      height: 800px;
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      gap:10px;
+      padding: 10px 20px;
+      box-sizing: border-box;
+      border: 2px solid #29b085 ;
+   }
+
+   &__userItem{
+      color: #a8a9ac;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 500;
+      font-size: 20px;
+   }
+
+   &__userStatus{
+      color: #a8a9ac;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+   }
+
+   &__window{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 800px;
+      width: 500px;
+      border-radius: 15px;
+      border: 2px solid #29b085 ;
+   }
+
+   &__input{
+      padding: 0 10px 10px 10px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+   }
+
+   &__picker{
+      position: absolute;
+      bottom: 20px;
+      right: 0;
+      width: 300px;
+   }
+
+   &__message{
+      margin-bottom: 10px;
+   }
+
+   &__btnSend{
+      width: 35px;
+      height: 35px;
+      display: flex;
+      cursor: pointer;
+      justify-content: center;
+      align-items: center;
+      border-radius: 100%;
+      background-color: #29b085;
+   }
+}

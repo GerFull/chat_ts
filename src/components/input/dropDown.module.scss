@@ -1,0 +1,50 @@
+.dropDown {
+   position: relative;
+
+   &_current {
+      border-bottom: 2px solid #29b085;
+      border-radius: 15px 15px 0 0;
+      background-color: #57585a;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &_title {
+         font-family: "Montserrat", sans-serif;
+         font-weight: 600;
+         font-size: 22px;
+         color: #a6a9ad;
+      }
+
+      img {
+         cursor: pointer;
+         width: 24px;
+         height: 24px;
+         transform: rotateX(180deg);
+      }
+   }
+
+   &__list {
+      width: 100%;
+      border-bottom: 2px solid #29b085;
+      background-color: #57585a;
+      display: flex;
+      flex-direction: column;
+  
+      &_item {
+         cursor: pointer;
+         padding: 15px 10px;
+         border-bottom: 1px solid #29b085;
+         font-family: "Montserrat", sans-serif;
+         font-weight: 500;
+         font-size: 18px;
+         color: #a6a9ad;
+      }
+
+      
+      &_item:hover {
+         background-color: #7f7f80;
+      }
+   }
+}

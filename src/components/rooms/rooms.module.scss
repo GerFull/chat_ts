@@ -1,0 +1,138 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+.rooms {
+   display: flex;
+   justify-content: center;
+   gap:20px;
+   position: relative;
+   align-items: center;
+   background-color: #3e3e3f;
+   width: 100%;
+   height: 100vh;
+
+   &__logo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+
+   }
+   &__container {
+      width: 400px;
+      max-height: 550px;
+      border-radius: 15px;
+      border: 2px solid #29b085;
+      background-color: #302e2f;
+      padding: 15px;
+      box-sizing: border-box;
+   }
+   &__usersContainer {
+      display: flex;
+      margin-top: 15px;
+      justify-content: space-between;
+      &_online{
+         max-height: 400px;
+         width: 260px;
+         border-radius: 15px;
+         border: 2px solid #29b085;
+         background-color: #57585a;
+         padding: 15px;
+         display: flex;
+         flex-direction: column;
+         justify-content: flex-start;
+         align-items: flex-start;
+         gap:10px;
+         box-sizing: border-box;
+      }
+      &_offline{
+         max-height: 400px;
+         overflow-y: auto;
+         width: 260px;
+         border-radius: 15px;
+         border: 2px solid #a8a9ac;
+         background-color: #57585a;
+         padding: 15px;
+         display: flex;
+         flex-direction: column;
+         justify-content: flex-start;
+         align-items: flex-start;
+         gap:10px;
+         box-sizing: border-box;
+      }
+   }
+
+   &__userName{
+      color: #a8a9ac;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 500;
+      font-size: 20px;
+   }
+
+   &__roomContainer {
+      width: 600px;
+      max-height: 550px;
+      border-radius: 15px;
+      border: 2px solid #29b085;
+      background-color: #57585a;
+      padding: 15px 30px;
+      box-sizing: border-box;
+   }
+
+   &__btnRoomContainer{
+      margin-top: 15px;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+   }
+
+   &__btnRoom{
+      width: 200px;
+
+   }
+
+   &__nameContainer {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+   }
+
+   &__itemContainer {
+      max-height: 390px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+   }
+
+   &__item {
+      cursor: pointer;
+      width: 100%;
+      box-sizing: border-box;
+      border: 2px solid #29b085;
+      background-color: #57585a;
+      border-radius: 15px;
+      align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 10px 15px;
+      &_title {
+         color: #a8a9ac;
+         font-family: "Montserrat", sans-serif;
+         font-weight: 600;
+         font-size: 25px;
+      }
+
+      &_online {
+         color: #29b085;
+      }
+
+      &_text {
+         color: #a8a9ac;
+         font-family: "Montserrat", sans-serif;
+         font-weight: 500;
+         font-size: 15px;
+         line-height: normal;
+      }
+   }
+}

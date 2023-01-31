@@ -1,0 +1,17 @@
+.btn{
+   user-select: none;
+   cursor: pointer;
+   background-color: #57585a;
+   border: 1px solid #29b085 ;
+   border-radius: 5px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 5px 0px;
+   color: #a8a9ad;
+   font-family: 'Montserrat', sans-serif;
+   text-transform: uppercase;
+   font-weight: 600;
+   font-size: 25px;
+   width: 100%;
+}
