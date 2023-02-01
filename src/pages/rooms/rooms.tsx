@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Room } from '../../types/data'
-import Btn from '../btn/btn'
-import Input from '../input/input'
+import Btn from '../../components/btn/btn'
+import Input from '../../components/input/input'
 import style from '../rooms/rooms.module.scss'
 
 interface Props {
@@ -35,7 +35,6 @@ function Rooms(props: Props) {
       if (localStorage.getItem('rooms') !== null) {
          setRooms(JSON.parse(localStorage.getItem('rooms') || ''))
       }
-
    }, [])
 
    window.addEventListener('storage', () => {
@@ -45,20 +44,6 @@ function Rooms(props: Props) {
          setRooms(JSON.parse(localStorage.getItem('rooms') || ''))
       }
    })
-
-
-   const clearStore = () => {
-      localStorage.clear()
-      setRooms([])
-   }
-
-
-   const deleteroom = (id: number) => {
-      console.log(id)
-      setRooms(prev => prev.filter(item => item.id !== id))
-      localStorage.setItem('rooms', JSON.stringify(rooms.filter(item => item.id !== id)))
-   }
-
 
    const openRoom = (id: number) => {
 
@@ -92,7 +77,7 @@ function Rooms(props: Props) {
 
    return (
       <div className={style.rooms}>
-         <img className={style.rooms__logo} src='../images/logo.png' />
+         <img className={style.rooms__logo} src='../images/logo.png' alt='logo' />
          <div className={style.rooms__container}>
             <div className={style.rooms__itemContainer}>
                {
@@ -103,21 +88,16 @@ function Rooms(props: Props) {
                      </div>
                   )
                }
-               
             </div>
-
-
             <div className={style.rooms__nameContainer}>
                <Input value={roomName} onChange={setRoomName} />
                <Btn text='добавить комнату' onClick={addRoom} disable={false} />
             </div>
-
          </div>
          {
             currentRoom ? <div className={style.rooms__roomContainer}>
-                  <p className={style.rooms__item_title}>{currentRoom.title}</p>
+               <p className={style.rooms__item_title}>{currentRoom.title}</p>
                <div className={style.rooms__usersContainer}>
-
                   <div className={style.rooms__usersContainer_online}>
                      {
                         currentRoom.users.filter(el => el.status === true).map(item =>
@@ -132,22 +112,15 @@ function Rooms(props: Props) {
                         )
                      }
                   </div>
-
-
-
                </div>
                <div className={style.rooms__btnRoomContainer}>
                   <div className={style.rooms__btnRoom}>
-                     <Btn text='Войти' onClick={()=>openRoom(currentRoom.id)} disable={false} />
+                     <Btn text='Войти' onClick={() => openRoom(currentRoom.id)} disable={false} />
                   </div>
                </div>
-
-
             </div> : null
          }
-
       </div>
-
    )
 }
 

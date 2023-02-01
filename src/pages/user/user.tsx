@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import style from '../user/user.module.scss'
 import { UserLocal } from '../../types/data'
-import Btn from '../btn/btn'
-import Input from '../input/input'
+import Btn from '../../components/btn/btn'
+import Input from '../../components/input/input'
 
 interface Props {
    setPage: React.Dispatch<React.SetStateAction<string>>
@@ -47,7 +47,7 @@ function User(props: Props) {
    return (
       <div className={style.user__background}>
          <div className={style.user__signIn}>
-            <img src='../images/logo.png' />
+            <img src='../images/logo.png' alt='logo' />
             <Input value={name} onChange={changeName}/>
             <Btn disable={disable} onClick={addName} text={'Войти'} />
          </div>

@@ -1,4 +1,4 @@
-.chat{
+.chat {
    background-color: #3e3e3f;
    width: 100%;
    height: 100vh;
@@ -6,6 +6,8 @@
    align-items: center;
    justify-content: center;
    position: relative;
+
+
    &__logo {
       position: absolute;
       top: 20px;
@@ -13,7 +15,7 @@
       z-index: 1;
    }
 
-   &__back{
+   &__back {
       position: absolute;
       top: 20px;
       left: 20px;
@@ -21,7 +23,7 @@
       z-index: 1;
    }
 
-   &__container{
+   &__container {
       display: flex;
       gap: 50px;
       width: 100%;
@@ -30,60 +32,154 @@
       box-sizing: border-box;
    }
 
-   &__usersContainer{
+   &__usersContainer {
       height: 800px;
       border-radius: 15px;
       display: flex;
       flex-direction: column;
-      gap:10px;
+      gap: 10px;
       padding: 10px 20px;
       box-sizing: border-box;
-      border: 2px solid #29b085 ;
+      border: 2px solid #29b085;
    }
 
-   &__userItem{
+   &__userItem {
       color: #a8a9ac;
       font-family: "Montserrat", sans-serif;
       font-weight: 500;
       font-size: 20px;
    }
 
-   &__userStatus{
+   &__userStatus {
       color: #a8a9ac;
       font-family: "Montserrat", sans-serif;
       font-weight: 500;
       font-size: 15px;
    }
 
-   &__window{
+   &__dialog {
+      height: 100%;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      position: relative;
+   }
+
+   &__window {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       height: 800px;
       width: 500px;
       border-radius: 15px;
-      border: 2px solid #29b085 ;
+      border: 2px solid #29b085;
    }
 
-   &__input{
+   &__input {
       padding: 0 10px 10px 10px;
       display: flex;
       gap: 10px;
       align-items: center;
+      position: relative;
    }
 
-   &__picker{
+   &__picker {
       position: absolute;
-      bottom: 20px;
+      bottom: 45px;
       right: 0;
       width: 300px;
    }
 
-   &__message{
-      margin-bottom: 10px;
+   &__message {
+      display: flex;
+      width: 100%;
+      padding: 5px 10px;
+      box-sizing: border-box;
+      justify-content: flex-start;
+
+      &_item {
+         margin-bottom: 10px;
+         background-color: #6c6d70;
+         width: fit-content;
+         max-width: 80%;
+         padding: 5px;
+         border-radius:0 10px 10px 10px;
+         border: 1px solid #29b085;
+         position: relative;
+      }
+
+      &_itemMain {
+         margin-bottom: 10px;
+         background-color: #939598;
+         width: fit-content;
+         max-width: 80%;
+         padding: 5px;
+         border-radius: 10px 10px 0 10px;
+      }
    }
 
-   &__btnSend{
+   &__forwardMessage{
+      margin-left: 5px;
+      padding-left: 5px;
+      border-left: 1px solid #29b085;
+   }
+
+   &__userName{
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+   }
+
+   &__userText{
+      color: white;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+   }
+
+   &__currentMessage{
+      width: 100%;
+      padding: 5px 10px;
+      position: relative;
+      box-sizing: border-box;
+      background-color: #57585a;
+      border-top:1px solid #29b085;
+      border-bottom: 1px solid #29b085;
+
+      &_title{
+         color: #a8a9ac;
+         font-family: "Montserrat", sans-serif;
+         font-weight: 700;
+         font-size: 18px;
+      }
+
+      &_name{
+   
+         font-family: "Montserrat", sans-serif;
+         font-weight: 600;
+         font-size: 16px;
+      }
+
+      &_text{
+         color: #a8a9ac;
+         font-family: "Montserrat", sans-serif;
+         font-weight: 600;
+         font-size: 14px;
+         text-overflow: ellipsis;
+         overflow: hidden;
+         white-space: nowrap;
+         width: 480px;
+      }
+
+      &_close{
+         position: absolute;
+         cursor: pointer;
+         right: 5px;
+         top:5px;
+      }
+   }
+   &__btnSend {
       width: 35px;
       height: 35px;
       display: flex;
@@ -93,4 +189,24 @@
       border-radius: 100%;
       background-color: #29b085;
    }
+
+   &__emoji{
+      position: absolute;
+      right: 60px;
+      cursor: pointer;
+   }
+
+   ::-webkit-scrollbar {
+      width: 8px;
+
+    }
+    ::-webkit-scrollbar-track {
+      border-radius: 8px;
+
+    }
+    ::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+
+      background: #29b085;
+    }
 }

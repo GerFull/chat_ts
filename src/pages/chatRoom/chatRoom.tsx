@@ -30,11 +30,22 @@ function ChatRoom(props: Props) {
          setChatRoom(localrooms.find(item => item.id === room))
       }
    })
+
    useEffect(() => {
       const localrooms: Room[] = JSON.parse(localStorage.getItem('rooms') || '')
       setChatRoom(localrooms.find(item => item.id === room))
       setRooms(localrooms)
-
+      localrooms.forEach(item => {
+         if (item.id === room) {
+            const user = item.users.find(item => item.user === sessionStorage.getItem('user'))
+            if (user !== undefined) {
+               user.status = true
+            }
+         }
+      }
+      )
+      setChatRoom(localrooms.find(item => item.id === room))
+      localStorage.setItem('rooms', JSON.stringify(localrooms))
    }, [])
 
    useEffect(() => {
@@ -43,7 +54,7 @@ function ChatRoom(props: Props) {
    }, [room])
 
 
-   window.onbeforeunload = function () {
+   window.addEventListener('beforeunload', function () {
       const localrooms: Room[] = JSON.parse(localStorage.getItem('rooms') || '')
       localrooms.forEach(item => {
          if (item.id === room) {
@@ -54,9 +65,11 @@ function ChatRoom(props: Props) {
          }
       }
       )
-      setChatRoom(localrooms.find(item => item.id === props.room))
+      setChatRoom(localrooms.find(item => item.id === room))
       localStorage.setItem('rooms', JSON.stringify(localrooms))
-   };
+   })
+
+
 
 
    const offline = () => {
@@ -79,26 +92,24 @@ function ChatRoom(props: Props) {
 
 
    const onEmojiClick = (emojiObject: EmojiClickData, event: MouseEvent) => {
-      setMessage((prevInput) => prevInput + emojiObject.emoji);
-      //setShowPicker(false);
-      //console.log(emojiObject.emoji)
+      setMessage((prevInput) => prevInput + emojiObject.emoji)
    };
 
    const sendMessage = () => {
 
       const localrooms: Room[] = JSON.parse(localStorage.getItem('rooms') || '')
-
       localrooms.forEach(item => {
          if (item.id === room) {
-            if (item.chat) {
+            if (item.chat && forward === undefined) {
                item.chat = [...item.chat, { user: sessionStorage.getItem('user') || '', message: message }]
+            } else if (item.chat && forward !== undefined) {
+               item.chat = [...item.chat, { user: sessionStorage.getItem('user') || '', message: message, sendOn: forward }]
             }
          }
       }
       )
       setMessage('')
-
-
+      setShowPicker(false)
       if (chatRoom) {
          if (forward !== undefined) {
             setChatRoom({
@@ -110,9 +121,8 @@ function ChatRoom(props: Props) {
             })
          }
       }
-
       localStorage.setItem('rooms', JSON.stringify(localrooms))
-
+      setForward(undefined)
    }
 
    const openRoom = (id: number) => {
@@ -136,69 +146,57 @@ function ChatRoom(props: Props) {
    }
 
 
-
-   // <button onClick={sendMessage}>Отпрвить</button>
-   // <button onClick={() => setShowPicker(!showPicker)}>Emoj</button>
-
-
    return (
-
-
       <div className={style.chat}>
-         <img className={style.chat__logo} src='../images/logo.png' />
+         <img className={style.chat__logo} src='../images/logo.png' alt='logo' />
          <div className={style.chat__back}>
             <Btn disable={false} text={'Назад'} onClick={offline} />
          </div>
-
-
          <div className={style.chat__container}>
             <div className={style.chat__window}>
                <DropDownInput openRoom={openRoom} rooms={rooms} chatRoom={chatRoom} setChatRoom={setChatRoom} />
-               <div>
+               <div className={style.chat__dialog}>
                   {
                      chatRoom?.chat?.map(item =>
-                        <div onClick={() => setForward(item)} className={style.chat__message}>
-                           <p>{item.user}</p>
-                           <div>
-                              {item.sendOn !== undefined &&
-                                 <div>
-                                    <p>{item.sendOn.user}</p>
-                                    <p>{item.sendOn.message}</p>
-                                 </div>}
+                        <div className={style.chat__message} style={item.user === sessionStorage.getItem('user')?.toLocaleLowerCase() ? { justifyContent: 'flex-end' } : { justifyContent: 'flex-start' }} >
+                           <div onClick={() => setForward(item)} className={item.user === sessionStorage.getItem('user')?.toLocaleLowerCase() ? style.chat__message_itemMain : style.chat__message_item}>
+                              <p className={style.chat__userName}>{item.user}</p>
+                              <div>
+                                 {item.sendOn !== undefined &&
+                                    <div className={style.chat__forwardMessage}>
+                                       <p className={style.chat__userName}>{item.sendOn.user}</p>
+                                       <p className={style.chat__userText}>{item.sendOn.message}</p>
+                                    </div>}
+                              </div>
+                              <p className={style.chat__userText}>{item.message}</p>
                            </div>
-                           <p>{item.message}</p>
-                        </div>)
+                        </div>
+                     )
                   }
                </div>
                <div>
-                  <div>
-                     {
-                        forward !== undefined &&
-                        <div>
-                           <p>Пересланное сообщение</p>
-                           <p>{forward.user}</p>
-                           <p>{forward.message}</p>
-                           <p onClick={() => setForward(undefined)}>Отменить</p>
-                        </div>
-                     }
-                  </div>
+                  {
+                     forward !== undefined &&
+                     <div className={style.chat__currentMessage}>
+                        <p className={style.chat__currentMessage_title}>Пересланное сообщение</p>
+                        <p className={style.chat__currentMessage_name}>{forward.user}</p>
+                        <p className={style.chat__currentMessage_text}>{forward.message}</p>
+                        <img onClick={() => setForward(undefined)} className={style.chat__currentMessage_close} src='../images/close.png' alt='close' />
+                     </div>
+                  }
                   <div className={style.chat__input}>
                      <Input value={message} onChange={setMessage} />
-                     <div className={style.chat__btnSend}>
-                        <img src='../images/send.png'/>
+                     <div onClick={sendMessage} className={style.chat__btnSend}>
+                        <img src='../images/send.png' alt='send' />
+                     </div>
+                     <img onClick={() => setShowPicker(!showPicker)} className={style.chat__emoji} src='../images/smile.png' alt='smile' />
+                     <div className={style.chat__picker}>
+                        {showPicker && (
+                           <Picker theme={Theme.DARK} width={300} onEmojiClick={onEmojiClick} />
+                        )}
                      </div>
                   </div>
-
-                  {/* <input value={message} onChange={(e) => setMessage(e.target.value)} type='text' /> */}
-
-                  <div className={style.chat__picker}>
-                     {showPicker && (
-                        <Picker theme={Theme.DARK} width={300} onEmojiClick={onEmojiClick} />
-                     )}
-                  </div>
-
                </div>
-
             </div>
             <div className={style.chat__usersContainer}>
                {
