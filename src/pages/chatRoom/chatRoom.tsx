@@ -154,7 +154,7 @@ function ChatRoom(props: Props) {
          </div>
          <div className={style.chat__container}>
             <div className={style.chat__window}>
-               <DropDownInput openRoom={openRoom} rooms={rooms} chatRoom={chatRoom} setChatRoom={setChatRoom} />
+               <DropDownInput openRoom={openRoom} rooms={rooms} chatRoom={chatRoom} />
                <div className={style.chat__dialog}>
                   {
                      chatRoom?.chat?.map(item =>

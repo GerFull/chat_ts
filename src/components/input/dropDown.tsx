@@ -3,14 +3,13 @@ import { Room } from '../../types/data'
 import style from "../input/dropDown.module.scss";
 
 interface Props {
-   setChatRoom: React.Dispatch<React.SetStateAction<Room | undefined>>
    chatRoom: Room | undefined
    rooms: Room[] | undefined
    openRoom : (id: number)=> void
 }
 
 function DropDown(props: Props) {
-   const { chatRoom, setChatRoom, rooms,openRoom } = props
+   const { chatRoom,  rooms,openRoom } = props
 
 
    const [show, setShow] = useState(false)
@@ -20,7 +19,7 @@ function DropDown(props: Props) {
       <div className={style.dropDown}>
          <div className={style.dropDown_current}>
             <p className={style.dropDown_current_title}>{chatRoom?.title}</p>
-            <img onClick={() => setShow(!show)} style={show ? { transform: 'rotateX(360deg)' } : undefined} src='../images/triangle.png' />
+            <img onClick={() => setShow(!show)} style={show ? { transform: 'rotateX(360deg)' } : undefined} src='../images/triangle.png' alt='triangle' />
          </div>
          {
             show && <div className={style.dropDown__list}>
